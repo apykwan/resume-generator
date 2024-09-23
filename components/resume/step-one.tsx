@@ -57,7 +57,6 @@ export default function StepOne() {
           onChange={e => onChange(e)}
           spellCheck={false}
           type="text"
-          required 
         />
         <Input 
           className="mb-3" 

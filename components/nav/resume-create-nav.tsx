@@ -24,7 +24,7 @@ export default function ResumeCreateNav() {
       : "bg-secondary text-gray-700 dark:text-gray-400";
   }
 
-  const btnClasses = "w-10 h-10 flex items-center justify-center rounded-full transition hover:bg-primary hover:text-slate"
+  const btnClasses = "italic w-10 h-10 flex items-center justify-center rounded-full transition hover:bg-primary hover:text-slate"
 
   function handleClick(item: string) {
     setStep(convertBtnValueToNum(item));
