@@ -1,7 +1,7 @@
 'use client';
 
 import { useResume } from '@/context/resume';
-import StepOne from '@/components/resume/step-one';
+import StepOneCreate from '@/components/resume/step-one-create';
 import StepTwo from '@/components/resume/step-two';
 import StepThree from '@/components/resume/step-three';
 import StepFour from '@/components/resume/step-four';
@@ -13,7 +13,7 @@ export default function ResumeCreatePage() {
   return (
     <section className="flex flex-col justify-center items-center h-screen">
       <ResumeCreateNav />
-      {step === 1 && <StepOne />}
+      {step === 1 && <StepOneCreate />}
       {step === 2 && <StepTwo />}
       {step === 3 && <StepThree />}
       {step === 4 && <StepFour />}

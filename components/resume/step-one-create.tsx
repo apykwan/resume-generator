@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useResume, type ResumeType } from '@/context/resume';
 
-export default function StepOne() {
+export default function StepOneCreate() {
   // context
   const { resume, setResume, saveResume } = useResume();
   // hooks
@@ -35,7 +35,7 @@ export default function StepOne() {
 
   console.log(resume)
   return (
-    <div className="w-full lg:w-1/2 p-5 shadow-lg border-t-4 rounded-lg">
+    <form className="w-full lg:w-1/2 p-5 shadow-lg border-t-4 rounded-lg">
       <h2 className="text-2xl font-bold mb-5">Personal Information</h2>
       <Input 
         className="mb-3" 
@@ -96,6 +96,6 @@ export default function StepOne() {
           <Button onClick={e => handleSubmit(e)}>Save</Button>
         )}
       </div>
-    </div>
+    </form>
   );
 }

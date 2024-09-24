@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
 import {
   type Experience,
@@ -49,5 +49,5 @@ const ResumeSchema = new Schema<Resume>(
   { timestamps: true }
 );
 
-const Resume = model("Resume", ResumeSchema);
+const Resume = models.Resume || model("Resume", ResumeSchema);
 export default Resume;

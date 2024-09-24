@@ -2,29 +2,35 @@
 
 import { 
   createContext, 
-  useContext, 
+  useContext,
+  useEffect, 
   useState, 
   type ReactNode 
 } from 'react';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+
+import { saveResumeToDb } from '@/actions/resume';
 
 type ResumeProviderProps ={
   children: ReactNode;
 }
 
-type ResumeType = {
+export type ResumeType = {
   name: string;
   job: string;
   address: string;
   phone: string;
   email: string;
-  themeColor: string;
+  themeColor?: string;
 }
 
 type ResumeContextType = {
   step: number;
   setStep: (step: number) => void;
   resume: ResumeType;
-  setResume: (resume: ResumeType) => void;
+  setResume: (cb: (value: ResumeType) => ResumeType) => void;
+  saveResume: () => void;
 }
 
 const initialState: ResumeType = {
@@ -40,14 +46,43 @@ const ResumeContext = createContext<ResumeContextType>({
   step: 1,
   resume: initialState,
   setResume: () => {},
-  setStep: () => {}
+  setStep: () => {},
+  saveResume: () => {}
 });
 
 export function ResumeProvider({ children }: ResumeProviderProps) {
   const [resume, setResume] = useState<ResumeType>(initialState);
   const [step, setStep] = useState<number>(1);
+
+  const router = useRouter();
+
+  async function saveResume() {
+    try {
+      const data = await saveResumeToDb(resume);
+      setResume(data);
+      toast.success("Resume Saved successfully");
+      router.push(`/dashboard/resume/edit/${data._id}`);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to save resume");
+    }
+  }
+
+  useEffect(() => {
+    const savedResume = localStorage.getItem("ak-resume-generator");
+    if (savedResume) setResume(JSON.parse(savedResume));
+  }, []);
+
   return (
-    <ResumeContext.Provider value={{ step, setStep, resume, setResume }}>
+    <ResumeContext.Provider 
+      value={{ 
+        step, 
+        setStep, 
+        resume, 
+        setResume, 
+        saveResume 
+      }}
+    >
       {children}
     </ResumeContext.Provider>
   );
