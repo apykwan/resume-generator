@@ -21,3 +21,23 @@ export async function saveResumeToDb(data: ResumeType) {
     console.error("An unexpected error occurred:", err);
   }
 }
+
+
+export async function getUserResumeFromDb() {
+  try {
+    db();
+    const user = await currentUser();
+    const userEmail  = user?.emailAddresses[0]?.emailAddress;
+
+    const resume = await Resume
+      .find({ userEmail })
+      .select('-__v');
+    return JSON.parse(JSON.stringify(resume));
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error("Database error occurred:", err.message);
+      throw err;
+    }
+    console.error("An unexpected error occurred:", err);
+  }
+}

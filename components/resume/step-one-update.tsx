@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useResume, type ResumeType } from '@/context/resume';
 
-export default function StepOne() {
+export default function StepOneUpdate() {
   // context
   const { resume, setResume, saveResume } = useResume();
   // hooks
@@ -29,11 +29,8 @@ export default function StepOne() {
   function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (!resume.name || !resume.job || !resume.phone || !resume.email) return;
-    // save resume to db
-    saveResume();
+    
   }
-
-  console.log(resume)
   return (
     <div className="w-full lg:w-1/2 p-5 shadow-lg border-t-4 rounded-lg">
       <h2 className="text-2xl font-bold mb-5">Personal Information</h2>
