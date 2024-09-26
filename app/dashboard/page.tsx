@@ -19,11 +19,12 @@ export default function Dashboard() {
       </>
     );
   }
+
   return (
-    <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5 px-5">
-      <pre>{resumes?.map((resume) => (
+    <main className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-5 px-5">
+      {resumes?.map((resume) => (
         <ResumeCard key={resume._id} resume={resume} />
-      ))}</pre>
+      ))}
     </main>
   );
 }

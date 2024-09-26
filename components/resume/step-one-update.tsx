@@ -29,7 +29,7 @@ export default function StepOneUpdate() {
   function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     if (!resume.name || !resume.job || !resume.phone || !resume.email) return;
-    
+    saveResume();
   }
   return (
     <div className="w-full lg:w-1/2 p-5 shadow-lg border-t-4 rounded-lg">
