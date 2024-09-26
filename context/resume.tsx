@@ -29,6 +29,7 @@ export type ResumeType = {
   phone: string;
   email: string;
   themeColor?: string;
+  summary?: string;
 }
 
 type ResumeContextType = {
@@ -47,7 +48,7 @@ const initialState: ResumeType = {
   address: '',
   phone: '',
   email: '',
-  themeColor: ''
+  themeColor: '#cc005f'
 };
 
 const ResumeContext = createContext<ResumeContextType>({
@@ -106,7 +107,6 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
       const data = await updateResumeFromDb(resume);
       setResume(data);
       toast.success("Resume Updated successfully");
-      setStep(3);
     } catch (err) {
       console.error(err);
       toast.error("Failed to update resume");

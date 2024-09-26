@@ -1,9 +1,13 @@
+import { usePathname } from 'next/navigation';
 import { twMerge } from 'tailwind-merge'
+
 import { useResume } from '@/context/resume';
 import { Button } from '@/components/ui/button';
 
 export default function ResumeCreateNav() {
   const { step, setStep } = useResume();
+  const pathname = usePathname();
+  const isEditPage = pathname.includes('/edit/');
 
   function convertBtnValueToNum(btn: string): number {
     let btnValue = 0;
@@ -35,7 +39,7 @@ export default function ResumeCreateNav() {
           <Button 
             key={item} 
             className={twMerge(btnClasses, activeBtn(item))}
-            disabled={step < convertBtnValueToNum(item)}
+            disabled={!isEditPage && step < convertBtnValueToNum(item)}
             onClick={handleClick.bind(null, item)}
           >
             {item}
