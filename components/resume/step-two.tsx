@@ -21,7 +21,7 @@ export default function StepTwo() {
   }
 
   return (
-    <section className="w-full md:w-1/2 p-5 shadow -lg border-t-4 rounded-lg space-y-3">
+    <section className="w-full p-5 shadow -lg border-t-4 rounded-lg space-y-3">
       <h2 className="text-2xl font-bold mg-5">Summary</h2>
       <form>
         <Textarea

@@ -11,7 +11,7 @@ import ResumeCreateNav from '@/components/nav/resume-create-nav';
 export default function ResumeCreatePage() {
   const { step, resume } = useResume();
   return (
-    <main className="flex flex-col justify-center items-center h-screen">
+    <main className="flex flex-col justify-center items-center h-screen overflow-y-auto">
       <ResumeCreateNav />
       {step === 1 && <StepOneCreate />}
       {step === 2 && <StepTwo />}
