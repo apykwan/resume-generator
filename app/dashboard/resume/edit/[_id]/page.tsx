@@ -1,7 +1,7 @@
 'use client';
 
 import { useResume } from '@/context/resume';
-import StepOne from '@/components/resume/step-one-update';
+import StepOneUpdate from '@/components/resume/step-one-update';
 import StepTwo from '@/components/resume/step-two';
 import StepThree from '@/components/resume/step-three';
 import StepFour from '@/components/resume/step-four';
@@ -19,7 +19,7 @@ export default function ResumeEditPage() {
 
       <div className="flex flex-col lg:w-1/2 p-4 lg:order-first lg:justify-center lg:items-start">
         <ResumeCreateNav />
-        {step === 1 && <StepOne />}
+        {step === 1 && <StepOneUpdate />}
         {step === 2 && <StepTwo />}
         {step === 3 && <StepThree />}
         {step === 4 && <StepFour />}

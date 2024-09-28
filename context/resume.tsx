@@ -7,7 +7,7 @@ import {
   useState, 
   type ReactNode 
 } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams, usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 import { 
@@ -68,6 +68,7 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
 
   const router = useRouter();
   const { _id } = useParams();
+  const pathname = usePathname();
 
   async function saveResume() {
     try {
@@ -112,6 +113,13 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
       toast.error("Failed to update resume");
     }
   }
+
+  useEffect(() => {
+    if (pathname?.includes('/resume/create')) {
+      setResume(initialState);
+      setStep(1);
+    }
+  }, [pathname]); 
 
   useEffect(() => {
     const savedResume = localStorage.getItem("ak-resume-generator");

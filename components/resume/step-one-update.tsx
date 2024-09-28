@@ -31,7 +31,10 @@ export default function StepOneUpdate() {
     setStep(2);
   }
   return (
-    <section className="w-full p-5 shadow-lg border-t-4 rounded-lg">
+    <section 
+      className="w-full p-5 shadow-lg border-t-4 rounded-lg"
+      style={{ borderColor: resume?.themeColor }}
+    >
       <form>
         <h2 className="text-2xl font-bold mb-5">Personal Information</h2>
         <Input 
