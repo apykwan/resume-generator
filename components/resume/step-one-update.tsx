@@ -2,6 +2,7 @@
 
 import { type ChangeEvent, type MouseEvent } from 'react';
 import { useUser, SignInButton } from '@clerk/nextjs';
+import { twMerge } from 'tailwind-merge';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -32,11 +33,16 @@ export default function StepOneUpdate() {
   }
   return (
     <section 
-      className="w-full p-5 shadow-lg border-t-4 rounded-lg"
+      className={twMerge('w-full p-5 shadow-lg border-t-4 rounded-lg space-y-3', 'dark:border-2')}
       style={{ borderColor: resume?.themeColor }}
     >
       <form>
-        <h2 className="text-2xl font-bold mb-5">Personal Information</h2>
+        <h2 
+          className="text-2xl font-bold mb-5"
+          style={{ color: resume.themeColor }}
+        >
+          Personal Information
+        </h2>
         <Input 
           className="mb-3" 
           value={resume.name}

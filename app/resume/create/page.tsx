@@ -13,17 +13,16 @@ export default function ResumeCreatePage() {
   const { step, resume } = useResume();
   return (
     <main className="flex flex-col lg:flex-row h-screen overflow-y-auto">
-      <div className="flex flex-col lg:w-1/2 p-4 lg:order-last lg:justify-center lg:items-center">
-        <PreviewCard />
-      </div>
-
-      <div className="flex flex-col lg:w-1/2 p-4 lg:order-first lg:justify-center lg:items-start">
+      <div className="flex flex-col lg:w-1/2 p-4 lg:justify-center lg:items-start">
         <ResumeCreateNav />
         {step === 1 && <StepOneCreate />}
         {step === 2 && <StepTwo />}
         {step === 3 && <StepThree />}
         {step === 4 && <StepFour />}
         {step === 5 && <StepFive />}
+      </div>
+      <div className="flex flex-col lg:w-1/2 p-4 lg:justify-center lg:items-center">
+        <PreviewCard />
       </div>
     </main>
   );

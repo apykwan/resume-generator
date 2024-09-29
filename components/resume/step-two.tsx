@@ -1,8 +1,11 @@
-import { useState, type ChangeEvent, type MouseEvent } from 'react';
+import { useState, type MouseEvent } from 'react';
+import dynamic from 'next/dynamic';
+import { twMerge } from 'tailwind-merge';
 import { Brain, Loader2Icon } from 'lucide-react';
 import toast from 'react-hot-toast';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
 
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useResume } from '@/context/resume';
 import { runAi } from '@/actions/ai';
@@ -11,10 +14,10 @@ export default function StepTwo() {
   const [loading, setLoading] = useState<boolean>(false);
   const { resume, setResume, updateResume, setStep } = useResume();
 
-  function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
+  function handleChange(content: any) {
     setResume(prevState => ({
       ...prevState,
-      summary: e.target.value
+      summary: content
     }));
   }
 
@@ -41,14 +44,16 @@ export default function StepTwo() {
   }
   return (
     <section 
-      className="w-full p-5 shadow -lg border-t-4 rounded-lg space-y-3"
+      className={twMerge('w-full p-5 shadow-lg border-t-4 rounded-lg', 'dark:border-2')}
       style={{ borderColor: resume?.themeColor }}
     >
       <div className="flex justify-between">
         <h2 
           className="text-2xl font-bold mg-5"
           style={{ color: resume?.themeColor }}
-        >Summary</h2>
+        >
+          Summary
+        </h2>
         <Button 
           variant="destructive" 
           onClick={handleGenerateWithAi}
@@ -63,13 +68,11 @@ export default function StepTwo() {
       </div>
       
       <form>
-        <Textarea
-          className="mb-3"
-          placeholder="Write a summary about yourself" 
-          onChange={handleChange} 
+        <ReactQuill 
+          theme="snow"
+          onChange={handleChange}
           value={resume.summary}
-          rows={10}
-          required  
+          className="my-3"
         />
         <div className="flex justify-end">
           <Button onClick={handleSubmit}>Next</Button>

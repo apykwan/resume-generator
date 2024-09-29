@@ -30,7 +30,19 @@ export type ResumeType = {
   email: string;
   themeColor?: string;
   summary?: string;
-}
+  experience?: ExperienceType[];
+  skills?: string[];
+  education?: string[];
+};
+
+export type ExperienceType = {
+  title: string;
+  company: string;
+  address?: string;
+  startDate: string;
+  endDate: string;
+  summary?: string;
+};
 
 type ResumeContextType = {
   step: number;
@@ -40,7 +52,24 @@ type ResumeContextType = {
   setResume: (cb: (value: ResumeType) => ResumeType) => void;
   saveResume: () => void;
   updateResume: () => void;
+  experienceList: ExperienceType[];
+  experienceLoading: boolean;
+  handleExperienceChange: (e: any, index: any) => void;
+  handleExperienceQuillChange: (value: any, index: any) => void;
+  handleExperienceSubmit: () => void;
+  addExperience: () => void;
+  removeExperience: () => void;
+  handleExperienceGenerateWithAi: () => void;
 }
+
+const expereinceField: ExperienceType = {
+  title: '',
+  company: '',
+  address: '',
+  startDate: '',
+  endDate: '',
+  summary: '',
+};
 
 const initialState: ResumeType = {
   name: '',
@@ -48,7 +77,10 @@ const initialState: ResumeType = {
   address: '',
   phone: '',
   email: '',
-  themeColor: '#cc005f'
+  themeColor: '#cc005f',
+  experience: [],
+  skills: [],
+  education: []
 };
 
 const ResumeContext = createContext<ResumeContextType>({
@@ -58,13 +90,23 @@ const ResumeContext = createContext<ResumeContextType>({
   setResume: () => {},
   setStep: () => {},
   saveResume: () => {},
-  updateResume: () => {}
+  updateResume: () => {},
+  experienceList: [],
+  experienceLoading: false,
+  handleExperienceChange: () => {},
+  handleExperienceQuillChange: () => {},
+  handleExperienceSubmit: () => {},
+  addExperience: () => {},
+  removeExperience: () => {},
+  handleExperienceGenerateWithAi: () => {}
 });
 
 export function ResumeProvider({ children }: ResumeProviderProps) {
   const [resume, setResume] = useState<ResumeType>(initialState);
   const [resumes, setResumes] = useState<ResumeType[]>([]);
   const [step, setStep] = useState<number>(1);
+  const [experienceList, setExperienceList] = useState<ExperienceType[]>([]);
+  const [experienceLoading, setExperienceLoading] = useState<boolean>(false);
 
   const router = useRouter();
   const { _id } = useParams();
@@ -114,6 +156,30 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
     }
   }
 
+  function handleExperienceChange(e: any, index:any) {
+
+  }
+
+  function handleExperienceQuillChange (value: any, index: any) {
+
+  }
+
+  function handleExperienceSubmit() {
+
+  }
+
+  function addExperience() {
+
+  }
+
+  function removeExperience() {
+
+  }
+
+  async function handleExperienceGenerateWithAi() {
+
+  }
+
   useEffect(() => {
     if (pathname?.includes('/resume/create')) {
       setResume(initialState);
@@ -134,6 +200,12 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
   useEffect(() => {
     if (_id) getResume(_id as string);
   }, [_id]);
+
+  useEffect(() => {
+    if (resume.experience && resume.experience.length > 0) {
+      setExperienceList(resume?.experience);
+    }
+  }, [resume]);
   return (
     <ResumeContext.Provider 
       value={{ 
@@ -143,7 +215,15 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
         resumes,
         setResume, 
         saveResume,
-        updateResume 
+        updateResume,
+        experienceList,
+        experienceLoading,
+        handleExperienceChange,
+        handleExperienceQuillChange,
+        handleExperienceSubmit,
+        addExperience,
+        removeExperience,
+        handleExperienceGenerateWithAi 
       }}
     >
       {children}

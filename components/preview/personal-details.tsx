@@ -16,7 +16,6 @@ export default function PersonalDetails({ resume }: PreviewCardProps) {
         <div className="font-normal text-xs">{resume.phone}</div>
         <div className="font-normal text-xs">{resume.email}</div>
       </div>
-      <hr className="border-[1.5px] my-2" style={{ borderColor: resume.themeColor }} />
     </>
   );
 }

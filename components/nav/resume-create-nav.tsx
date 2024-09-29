@@ -5,7 +5,7 @@ import { useResume } from '@/context/resume';
 import { Button } from '@/components/ui/button';
 
 export default function ResumeCreateNav() {
-  const { step, setStep } = useResume();
+  const { step, setStep, resume } = useResume();
   const pathname = usePathname();
   const isEditPage = pathname.includes('/edit/');
 
@@ -26,7 +26,7 @@ export default function ResumeCreateNav() {
       : "bg-secondary text-gray-700 dark:text-gray-400";
   }
 
-  const btnClasses = "italic w-10 h-10 flex items-center justify-center rounded-full transition hover:bg-primary hover:text-slate"
+  const btnClasses = "w-10 h-10 flex items-center justify-center rounded-full transition hover:bg-primary hover:text-slate"
 
   function handleClick(item: string) {
     setStep(convertBtnValueToNum(item));

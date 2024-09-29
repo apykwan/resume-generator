@@ -35,7 +35,10 @@ const ResumeSchema = new Schema<Resume>(
       required: true,
     },
     title: String,
-    name: String,
+    name: {
+      type: String,
+      required: true
+    },
     job: String,
     address: String,
     phone: String,
