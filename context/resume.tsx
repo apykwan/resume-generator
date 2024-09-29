@@ -5,7 +5,8 @@ import {
   useContext,
   useEffect, 
   useState, 
-  type ReactNode 
+  type ReactNode,
+  type ChangeEvent, 
 } from 'react';
 import { useRouter, useParams, usePathname } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -53,16 +54,16 @@ type ResumeContextType = {
   saveResume: () => void;
   updateResume: () => void;
   experienceList: ExperienceType[];
-  experienceLoading: boolean;
-  handleExperienceChange: (e: any, index: any) => void;
-  handleExperienceQuillChange: (value: any, index: any) => void;
+  experienceLoading: any;
+  handleExperienceChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  handleExperienceQuillChange: (value: any, index: number) => void;
   handleExperienceSubmit: () => void;
   addExperience: () => void;
   removeExperience: () => void;
-  handleExperienceGenerateWithAi: () => void;
+  handleExperienceGenerateWithAi: (index: number) => void;
 }
 
-const expereinceField: ExperienceType = {
+const experienceField: ExperienceType = {
   title: '',
   company: '',
   address: '',
@@ -92,7 +93,7 @@ const ResumeContext = createContext<ResumeContextType>({
   saveResume: () => {},
   updateResume: () => {},
   experienceList: [],
-  experienceLoading: false,
+  experienceLoading: {},
   handleExperienceChange: () => {},
   handleExperienceQuillChange: () => {},
   handleExperienceSubmit: () => {},
@@ -104,9 +105,9 @@ const ResumeContext = createContext<ResumeContextType>({
 export function ResumeProvider({ children }: ResumeProviderProps) {
   const [resume, setResume] = useState<ResumeType>(initialState);
   const [resumes, setResumes] = useState<ResumeType[]>([]);
-  const [step, setStep] = useState<number>(1);
-  const [experienceList, setExperienceList] = useState<ExperienceType[]>([]);
-  const [experienceLoading, setExperienceLoading] = useState<boolean>(false);
+  const [step, setStep] = useState<number>(3);
+  const [experienceList, setExperienceList] = useState<ExperienceType[]>([experienceField]);
+  const [experienceLoading, setExperienceLoading] = useState({});
 
   const router = useRouter();
   const { _id } = useParams();
@@ -156,11 +157,11 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
     }
   }
 
-  function handleExperienceChange(e: any, index:any) {
+  function handleExperienceChange(e: ChangeEvent<HTMLInputElement>, index: number) {
 
   }
 
-  function handleExperienceQuillChange (value: any, index: any) {
+  function handleExperienceQuillChange (value: any, index: number) {
 
   }
 
@@ -169,14 +170,19 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
   }
 
   function addExperience() {
-
+    setExperienceList(prevState => {
+      return [...prevState, experienceField]
+    });
   }
 
   function removeExperience() {
-
+    if (experienceList.length === 1) return;
+    const newEntries = experienceList.slice(0, -1);
+    setExperienceList(newEntries);
+    // update the db 
   }
 
-  async function handleExperienceGenerateWithAi() {
+  async function handleExperienceGenerateWithAi(index: number) {
 
   }
 
