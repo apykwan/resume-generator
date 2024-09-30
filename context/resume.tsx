@@ -15,8 +15,10 @@ import {
   saveResumeToDb, 
   getUserResumeFromDb,
   getResumeFromDb,
-  updateResumeFromDb 
+  updateResumeFromDb,
+  updateExperienceToDb 
 } from '@/actions/resume';
+import { runAi } from '@/actions/ai';
 
 type ResumeProviderProps ={
   children: ReactNode;
@@ -158,15 +160,41 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
   }
 
   function handleExperienceChange(e: ChangeEvent<HTMLInputElement>, index: number) {
-
+    const { name, value } = e.target;
+    const newEntries = [...experienceList];
+    newEntries[index] = { 
+      ...newEntries[index], 
+      [name]: value 
+    };
+    setExperienceList(newEntries);
   }
 
   function handleExperienceQuillChange (value: any, index: number) {
-
+    const newEntries = [...experienceList];
+    newEntries[index] = { 
+      ...newEntries[index], 
+      summary: value 
+    };
+    setExperienceList(newEntries);
   }
 
   function handleExperienceSubmit() {
+    updateExperience(experienceList);
+    setStep(4);
+  }
 
+  async function updateExperience(experienceList: ExperienceType[]) {
+    try {
+      const data = await updateExperienceToDb({ 
+        ...resume, 
+        experience: experienceList 
+      });
+      setResume(data);
+      toast.success("Experience Updated successfully");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update resume");
+    }
   }
 
   function addExperience() {
@@ -177,13 +205,41 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
 
   function removeExperience() {
     if (experienceList.length === 1) return;
-    const newEntries = experienceList.slice(0, -1);
+    const newEntries = [...experienceList].slice(0, -1);
     setExperienceList(newEntries);
     // update the db 
   }
 
   async function handleExperienceGenerateWithAi(index: number) {
+    setExperienceLoading(prevState => ({ ...prevState, [index]: true }));
+    // get the index of the last experience entry
 
+    const selectedExperience = experienceList[index];
+    if (!selectedExperience || !selectedExperience.title) {
+      toast.error("Please fill in the job details for the selected experience entry");
+      setExperienceLoading(prevState => ({ ...prevState, [index]: false }));
+      return;
+    }
+
+    const jobTitle = selectedExperience.title; 
+    const jobSummary = selectedExperience.summary || '';  
+    try {
+      const aiGenerateCommand = `Generate a list of duties and responsibilities in HTML bullet points for ${jobTitle} ${jobSummary}, not in markdown format.`;
+      const response = await runAi(aiGenerateCommand);
+
+      const updatedExperienceList = [...experienceList];
+      updatedExperienceList[index] = {
+        ...selectedExperience,
+        summary: response
+      }
+
+      setExperienceList(updatedExperienceList);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to update resume");
+    } finally {
+      setExperienceLoading(prevState => ({ ...prevState, [index]: false }));
+    }
   }
 
   useEffect(() => {

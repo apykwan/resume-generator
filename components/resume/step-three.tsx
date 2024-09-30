@@ -46,6 +46,17 @@ export default function StepThree() {
           />
           <Input 
             className="mb-3" 
+            value={experience.company}
+            name="company"
+            placeholder="Company Name"
+            onChange={e => handleExperienceChange(e, index)}
+            spellCheck={false}
+            type="text"
+            autoFocus 
+            required 
+          />
+          <Input 
+            className="mb-3" 
             value={experience.address}
             name="address"
             placeholder="Company Address"
@@ -87,7 +98,7 @@ export default function StepThree() {
               disabled={experienceLoading[index]}
             >
               {experienceLoading[index] ? (
-                <Loader2Icon size={18} className="mr-2" />
+                <Loader2Icon size={18} className="mr-2 animate-spin" />
               ) : (
                 <Brain size={18} className="mr-2" />
               )}
