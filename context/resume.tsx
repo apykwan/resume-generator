@@ -39,6 +39,7 @@ export type ResumeType = {
 };
 
 export type ExperienceType = {
+  _id?: string;
   title: string;
   company: string;
   address?: string;
