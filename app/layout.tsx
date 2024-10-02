@@ -4,6 +4,8 @@ import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs';
 import { ThemeProvider } from '@/context/theme';
 import { ResumeProvider } from '@/context/resume';
+import { ExperienceProvider } from '@/context/experience';
+import { EducationProvider } from '@/context/education';
 import TopNav from '@/components/nav/top-nav';
 
 const geistSans = localFont({
@@ -40,8 +42,12 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <ResumeProvider>
-              <TopNav />
-              {children}
+              <ExperienceProvider>
+                <EducationProvider>
+                  <TopNav />
+                  {children}
+                </EducationProvider>
+              </ExperienceProvider>
             </ResumeProvider>
           </ThemeProvider>
         </body>

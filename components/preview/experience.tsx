@@ -2,7 +2,8 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.bubble.css';
 
-import { type ResumeType, type ExperienceType } from '@/context/resume';
+import { type ResumeType } from '@/context/resume';
+import { type ExperienceType } from '@/context/experience';
 
 type ExperienceProps = {
   resume: ResumeType;

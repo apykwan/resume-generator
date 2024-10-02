@@ -114,3 +114,22 @@ export async function updateExperienceToDb(data: ResumeType) {
     console.error("An unexpected error occurred:", err);
   }
 }
+
+export async function updateEducationToDb(data: ResumeType) {
+try {
+    db();
+    const { _id, education } = data; 
+
+    // check ownership
+    await checkOwnership(_id as string);
+
+    const resume = await Resume.findByIdAndUpdate(_id, { education }, { new: true }); 
+    return JSON.parse(JSON.stringify(resume));
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error("Database error occurred:", err.message);
+      throw err;
+    }
+    console.error("An unexpected error occurred:", err);
+  }
+}

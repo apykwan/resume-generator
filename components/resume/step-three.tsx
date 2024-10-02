@@ -6,10 +6,11 @@ import 'react-quill/dist/quill.snow.css';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useResume } from '@/context/resume';
+import { useExperience } from '@/context/experience';
 
 export default function StepThree() {
+  const { resume } = useResume();
   const {
-    resume,
     experienceList,
     experienceLoading,
     handleExperienceChange,
@@ -18,7 +19,7 @@ export default function StepThree() {
     addExperience,
     removeExperience,
     handleExperienceGenerateWithAi
-  } = useResume();
+  } = useExperience();
 
   return (
     <section 
