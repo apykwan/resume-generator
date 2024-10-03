@@ -6,12 +6,7 @@ type SummaryProps = {
 };
 
 export default function Summary({ resume }: SummaryProps) {
-  let briefSummary = '';
-  if (resume.summary) {
-    briefSummary = resume.summary 
-    ?  DOMPurify.sanitize(resume.summary?.substring(0, 100) + '...')
-    : '';
-  }
+  let summary = DOMPurify.sanitize(resume?.summary as string);
   return (
     <>
       {resume.summary && (
@@ -24,7 +19,7 @@ export default function Summary({ resume }: SummaryProps) {
           </h2>
           <article 
             className="text-xs font-normal my-3"
-            dangerouslySetInnerHTML={{ __html: briefSummary }}
+            dangerouslySetInnerHTML={{ __html: summary }}
           >
           </article>
         </div>

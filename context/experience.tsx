@@ -61,7 +61,6 @@ const ExperienceContext = createContext<ExperienceContextType>({
 
 export function ExperienceProvider({ children }: ResumeProviderProps) {
   const { setStep, resume, setResume } = useResume();
-  // experience
   const [experienceList, setExperienceList] = useState<ExperienceType[]>([experienceField]);
   const [experienceLoading, setExperienceLoading] = useState({});
 
@@ -121,6 +120,7 @@ export function ExperienceProvider({ children }: ResumeProviderProps) {
     const newEntries = [...experienceList].slice(0, -1);
     setExperienceList(newEntries);
     // update the db 
+    updateExperience(newEntries);
   }
 
   async function handleExperienceGenerateWithAi(index: number) {

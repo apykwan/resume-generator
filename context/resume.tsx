@@ -18,6 +18,7 @@ import {
 } from '@/actions/resume';
 import { ExperienceType } from './experience';
 import { EducationType } from './education';
+import { SkillsType } from './skills';
 
 type ResumeProviderProps ={
   children: ReactNode;
@@ -33,7 +34,7 @@ export type ResumeType = {
   themeColor?: string;
   summary?: string;
   experience?: ExperienceType[];
-  skills?: string[];
+  skills?: SkillsType[];
   education?: EducationType[];
 };
 
