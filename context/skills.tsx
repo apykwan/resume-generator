@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-import { useResume } from './resume';
+import { useResume } from './index';
 import { updateSkillsToDb } from '@/actions/resume';
 
 type ResumeProviderProps ={
@@ -33,7 +33,7 @@ type SkillsContextType = {
   removeSkills: () => void;
 }
 
-export const skillsField = {
+export const skillsField: SkillsType = {
   name: "",
   level: ""
 };

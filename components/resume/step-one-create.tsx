@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useResume, type ResumeType } from '@/context/resume';
+import { useResume, type ResumeType } from '@/context';
 
 export default function StepOneCreate() {
   const { resume, setResume, saveResume } = useResume();

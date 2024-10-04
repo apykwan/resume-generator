@@ -1,6 +1,6 @@
 'use client';
 
-import { useResume } from '@/context/resume';
+import { useResume } from '@/context';
 import StepOneUpdate from '@/components/resume/step-one-update';
 import StepTwo from '@/components/resume/step-two';
 import StepThree from '@/components/resume/step-three';
@@ -12,7 +12,7 @@ import PreviewCard from '@/components/cards/preview-card';
 export default function ResumeEditPage() {
   const { step, resume } = useResume();
   return (
-    <main className="flex flex-col lg:flex-row h-screen overflow-y-auto">
+    <main className="flex flex-col lg:flex-row">
       <div className="flex flex-col lg:w-1/2 p-4 lg:justify-center lg:items-start">
         <ResumeCreateNav />
         {step === 1 && <StepOneUpdate />}

@@ -10,7 +10,7 @@ import {
 } from 'react';
 import toast from 'react-hot-toast';
 
-import { useResume } from './resume';
+import { useResume } from './index';
 import { updateExperienceToDb } from '@/actions/resume';
 import { runAi } from '@/actions/ai';
 

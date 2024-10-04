@@ -16,9 +16,11 @@ import {
   getResumeFromDb,
   updateResumeFromDb,
 } from '@/actions/resume';
-import { ExperienceType, experienceField } from './experience';
-import { EducationType, educationField } from './education';
-import { SkillsType, skillsField } from './skills';
+import { 
+  ExperienceType, 
+  EducationType, 
+  SkillsType, 
+} from './index';
 
 type ResumeProviderProps ={
   children: ReactNode;
@@ -55,9 +57,24 @@ const initialState: ResumeType = {
   phone: '',
   email: '',
   themeColor: '#cc005f',
-  experience: [experienceField],
-  skills: [skillsField],
-  education: [educationField]
+  experience: [{
+    title: '',
+    company: '',
+    address: '',
+    startDate: '',
+    endDate: '',
+    summary: '',
+  }],
+  skills: [{
+    name: "",
+    level: ""
+  }],
+  education: [{
+    name: '',
+    address: '',
+    qualification: '',
+    year: '',
+  }]
 };
 
 const ResumeContext = createContext<ResumeContextType>({
@@ -73,7 +90,7 @@ const ResumeContext = createContext<ResumeContextType>({
 export function ResumeProvider({ children }: ResumeProviderProps) {
   const [resume, setResume] = useState<ResumeType>(initialState);
   const [resumes, setResumes] = useState<ResumeType[]>([]);
-  const [step, setStep] = useState<number>(5);
+  const [step, setStep] = useState<number>(1);
 
   const router = useRouter();
   const { _id } = useParams();

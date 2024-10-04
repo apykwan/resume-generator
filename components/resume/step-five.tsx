@@ -2,8 +2,7 @@ import { ArrowRight, Plus, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useResume } from '@/context/resume';
-import { useSkills, type SkillsType } from '@/context/skills';
+import { useResume, useSkills } from '@/context';
 
 export default function StepFive() {
   const { resume } = useResume();
@@ -19,9 +18,9 @@ export default function StepFive() {
   const skillLevels = [
     { label: "Novice", value: 1 },
     { label: "Basic", value: 2 },
-    { label: "Moderate", value: 3 },
+    { label: "Intermediate", value: 3 },
     { label: "Advanced", value: 4 },
-    { label: "Proficient", value: 5 },
+    { label: "Expert", value: 5 },
   ];
   console.log(skillsList)
   return (

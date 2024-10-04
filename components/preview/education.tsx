@@ -1,5 +1,5 @@
 import { type ResumeType } from '@/context/resume';
-import { type EducationType, useEducation } from '@/context/education';
+import { type EducationType, useEducation } from '@/context';
 
 type EducationProps = {
   resume: ResumeType;

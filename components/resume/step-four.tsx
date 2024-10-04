@@ -3,7 +3,7 @@ import { ArrowRight, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useResume } from '@/context/resume';
-import { useEducation, type EducationType } from '@/context/education';
+import { useEducation, type EducationType } from '@/context';
 
 export default function StepFour() {
   const { resume } = useResume();

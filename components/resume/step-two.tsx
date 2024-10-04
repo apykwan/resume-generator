@@ -7,7 +7,7 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 
 import { Button } from '@/components/ui/button';
-import { useResume } from '@/context/resume';
+import { useResume } from '@/context';
 import { runAi } from '@/actions/ai';
 
 export default function StepTwo() {
@@ -52,7 +52,7 @@ export default function StepTwo() {
           className="text-2xl font-bold mg-5"
           style={{ color: resume?.themeColor }}
         >
-          Summary
+          Objective
         </h2>
         <Button 
           variant="destructive" 

@@ -3,10 +3,11 @@
 import { type ChangeEvent, type MouseEvent } from 'react';
 import { useUser, SignInButton } from '@clerk/nextjs';
 import { twMerge } from 'tailwind-merge';
+import { HexColorPicker } from 'react-colorful';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useResume, type ResumeType } from '@/context/resume';
+import { useResume, type ResumeType } from '@/context';
 
 export default function StepOneUpdate() {
   const { resume, setResume, updateResume, setStep } = useResume();
@@ -23,6 +24,13 @@ export default function StepOneUpdate() {
 
       return updatedResume;
     });
+  }
+
+  function handlePickColor(themeColor: string) {
+    setResume((prevState: ResumeType) => ({
+      ...prevState,
+      themeColor
+    }));
   }
 
   function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
@@ -92,13 +100,16 @@ export default function StepOneUpdate() {
           type="email"
           required 
         />
+
+        <HexColorPicker color={resume.themeColor} onChange={handlePickColor} />
+
         <div className="flex justify-end">
           {!isSignedIn ? (
             <SignInButton>
               <Button>Sign in to Save</Button>
             </SignInButton>
           ) : (
-            <Button onClick={e => handleSubmit(e)}>Save</Button>
+            <Button onClick={e => handleSubmit(e)}>Save!</Button>
           )}
         </div>
       </form>

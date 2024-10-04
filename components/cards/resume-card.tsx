@@ -2,9 +2,10 @@ import Link from 'next/link';
 
 import Experience from '@/components/preview/experience';
 import Education from '@/components/preview/education';
+import Skills from '@/components/preview/skills';
 import Summary from '@/components/preview/summary';
 import PersonalDetails from '@/components/preview/personal-details';
-import { type ResumeType } from '@/context/resume';
+import { type ResumeType } from '@/context';
 
 type ResumeCardProps = {
   resume: ResumeType; 
@@ -28,6 +29,9 @@ export default function ResumeCard({ resume }: ResumeCardProps) {
         </div>
         <div className="line-clamp-3">
           <Education resume={resume} />
+        </div>
+        <div className="line-clamp-3">
+          <Skills resume={resume} print={true} />
         </div>
       </div>
     </Link>

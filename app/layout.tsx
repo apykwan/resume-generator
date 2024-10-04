@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs';
-import { ThemeProvider } from '@/context/theme';
-import { ResumeProvider } from '@/context/resume';
-import { ExperienceProvider } from '@/context/experience';
-import { EducationProvider } from '@/context/education';
-import { SkillsProvider } from '@/context/skills';
+
+import { 
+  ThemeProvider, 
+  ResumeProvider, 
+  ExperienceProvider, 
+  EducationProvider, 
+  SkillsProvider
+} from '@/context';
 import TopNav from '@/components/nav/top-nav';
 
 const geistSans = localFont({
@@ -14,6 +17,7 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",

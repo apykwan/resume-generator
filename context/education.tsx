@@ -11,7 +11,7 @@ import {
 import toast from 'react-hot-toast';
 
 import { updateEducationToDb } from '@/actions/resume';
-import { useResume } from './resume';
+import { useResume } from './index';
 
 type EducationProviderProps ={
   children: ReactNode;

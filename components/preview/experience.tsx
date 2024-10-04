@@ -3,7 +3,7 @@ const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.bubble.css';
 
 import { type ResumeType } from '@/context/resume';
-import { type ExperienceType, useExperience } from '@/context/experience';
+import { type ExperienceType, useExperience } from '@/context';
 
 type ExperienceProps = {
   resume: ResumeType;

@@ -2,7 +2,8 @@ import Summary from '@/components/preview/summary';
 import PersonalDetails from '@/components/preview/personal-details';
 import Experience from '@/components/preview/experience';
 import Education from '@/components/preview/education';
-import { useResume } from '@/context/resume';
+import Skills from '@/components/preview/skills';
+import { useResume } from '@/context';
 
 export default function PreviewCard() {
   const { resume } = useResume();
@@ -20,6 +21,7 @@ export default function PreviewCard() {
       ): ""}
       <Experience resume={resume} />
       <Education resume={resume} />
+      <Skills resume={resume} print={false} />
     </div>
   );
 }

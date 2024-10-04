@@ -1,4 +1,4 @@
-import { type ResumeType } from '@/context/resume';
+import { type ResumeType } from '@/context';
 
 type PreviewCardProps = {
   resume: ResumeType; 

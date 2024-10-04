@@ -5,8 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useResume } from '@/context/resume';
-import { useExperience } from '@/context/experience';
+import { useResume, useExperience } from '@/context';
 
 export default function StepThree() {
   const { resume } = useResume();

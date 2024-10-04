@@ -1,6 +1,6 @@
 'use client';
 
-import { useResume } from '@/context/resume';
+import { useResume } from '@/context';
 import SkeletonCard from '@/components/cards/skeleton-card';
 import ResumeCard from '@/components/cards/resume-card';
 
