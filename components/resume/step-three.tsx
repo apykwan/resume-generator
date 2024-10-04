@@ -20,7 +20,7 @@ export default function StepThree() {
     removeExperience,
     handleExperienceGenerateWithAi
   } = useExperience();
-
+  console.log(experienceList);
   return (
     <section 
       className="w-full p-5 shadow-lg border-t-4 rounded-lg overflow-y-auto"
@@ -33,7 +33,7 @@ export default function StepThree() {
         Experience
       </h2>
       {experienceList?.length > 0 && experienceList?.map((experience, index) => (
-        <div key={index} className="mb-10">
+        <div key={`experience-${index}`} className="mb-10">
           <Input 
             className="mb-3" 
             value={experience.title}

@@ -27,7 +27,6 @@ export default function StepOneUpdate() {
 
   function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    if (!resume.name || !resume.job || !resume.phone || !resume.email) return;
     updateResume();
     setStep(2);
   }

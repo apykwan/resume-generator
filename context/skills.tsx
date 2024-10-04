@@ -26,20 +26,22 @@ export type SkillsType = {
 
 type SkillsContextType = {
   skillsList: SkillsType[];
-  handleSkillsChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  handleSkillsNameChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  handleSkillsLevelChange: (level: string, index: number) => void;
   handleSkillsSubmit: () => void;
   addSkills: () => void;
   removeSkills: () => void;
 }
 
-const skillsField: SkillsType = {
+export const skillsField = {
   name: "",
   level: ""
 };
 
 const SkillsContext = createContext<SkillsContextType>({
   skillsList: [],
-  handleSkillsChange: () => {},
+  handleSkillsNameChange: () => {},
+  handleSkillsLevelChange: () => {},
   handleSkillsSubmit: () => {},
   addSkills: () => {},
   removeSkills: () => {},
@@ -50,19 +52,28 @@ export function SkillsProvider({ children }: ResumeProviderProps) {
   const router = useRouter();
   const [skillsList, setSkillsList] = useState<SkillsType[]>([skillsField]);
 
-  function handleSkillsChange(e: ChangeEvent<HTMLInputElement>, index: number) {
-    const { name, value } = e.target;
+  function handleSkillsNameChange(e: ChangeEvent<HTMLInputElement>, index: number) {
+    const { value } = e.target;
     const newEntries = [...skillsList];
     newEntries[index] = { 
       ...newEntries[index], 
-      [name]: value 
+      name: value 
+    };
+    setSkillsList(newEntries);
+  }
+
+  function handleSkillsLevelChange(level: string, index: number) {
+    const newEntries = [...skillsList];
+    newEntries[index] = { 
+      ...newEntries[index], 
+      level
     };
     setSkillsList(newEntries);
   }
 
   function handleSkillsSubmit() {
     updateSkills(skillsList);
-    router.push(`/dashboard/resume/download/${resume._id}`);
+    // router.push(`/dashboard/resume/download/${resume._id}`);
   }
 
   async function updateSkills(skillsList: SkillsType[]) {
@@ -117,7 +128,8 @@ export function SkillsProvider({ children }: ResumeProviderProps) {
     <SkillsContext.Provider 
       value={{ 
         skillsList,
-        handleSkillsChange,
+        handleSkillsNameChange,
+        handleSkillsLevelChange,
         handleSkillsSubmit,
         addSkills,
         removeSkills,
@@ -128,4 +140,4 @@ export function SkillsProvider({ children }: ResumeProviderProps) {
   );
 }
 
-export const useExperience = () => useContext(SkillsContext);
+export const useSkills = () => useContext(SkillsContext);

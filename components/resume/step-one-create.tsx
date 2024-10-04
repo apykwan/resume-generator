@@ -27,7 +27,8 @@ export default function StepOneCreate() {
 
   function handleSubmit(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    if (!resume.name || !resume.job || !resume.phone || !resume.email) return;
+    // if (!resume.name || !resume.job || !resume.phone || !resume.email) return;
+    console.log('save')
     // save resume to db
     saveResume();
   }

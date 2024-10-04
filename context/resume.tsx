@@ -16,9 +16,9 @@ import {
   getResumeFromDb,
   updateResumeFromDb,
 } from '@/actions/resume';
-import { ExperienceType } from './experience';
-import { EducationType } from './education';
-import { SkillsType } from './skills';
+import { ExperienceType, experienceField } from './experience';
+import { EducationType, educationField } from './education';
+import { SkillsType, skillsField } from './skills';
 
 type ResumeProviderProps ={
   children: ReactNode;
@@ -55,9 +55,9 @@ const initialState: ResumeType = {
   phone: '',
   email: '',
   themeColor: '#cc005f',
-  experience: [],
-  skills: [],
-  education: []
+  experience: [experienceField],
+  skills: [skillsField],
+  education: [educationField]
 };
 
 const ResumeContext = createContext<ResumeContextType>({
@@ -73,7 +73,7 @@ const ResumeContext = createContext<ResumeContextType>({
 export function ResumeProvider({ children }: ResumeProviderProps) {
   const [resume, setResume] = useState<ResumeType>(initialState);
   const [resumes, setResumes] = useState<ResumeType[]>([]);
-  const [step, setStep] = useState<number>(3);
+  const [step, setStep] = useState<number>(5);
 
   const router = useRouter();
   const { _id } = useParams();
@@ -123,12 +123,12 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
     }
   }
 
-  useEffect(() => {
-    if (pathname?.includes('/resume/create')) {
-      setResume(initialState);
-      setStep(1);
-    }
-  }, [pathname]); 
+  // useEffect(() => {
+  //   if (pathname?.includes('/resume/create')) {
+  //     setResume(initialState);
+  //     setStep(1);
+  //   }
+  // }, [pathname]); 
 
   useEffect(() => {
     const savedResume = localStorage.getItem("ak-resume-generator");

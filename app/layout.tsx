@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/context/theme';
 import { ResumeProvider } from '@/context/resume';
 import { ExperienceProvider } from '@/context/experience';
 import { EducationProvider } from '@/context/education';
+import { SkillsProvider } from '@/context/skills';
 import TopNav from '@/components/nav/top-nav';
 
 const geistSans = localFont({
@@ -44,8 +45,10 @@ export default function RootLayout({
             <ResumeProvider>
               <ExperienceProvider>
                 <EducationProvider>
-                  <TopNav />
-                  {children}
+                  <SkillsProvider>
+                    <TopNav />
+                    {children}
+                  </SkillsProvider>
                 </EducationProvider>
               </ExperienceProvider>
             </ResumeProvider>

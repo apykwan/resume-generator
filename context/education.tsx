@@ -33,7 +33,7 @@ type EducationContextType = {
   removeEducation: () => void;
 }
 
-const educationField: EducationType = {
+export const educationField: EducationType = {
   name: '',
   address: '',
   qualification: '',
@@ -51,7 +51,6 @@ const EducationContext = createContext<EducationContextType>({
 export function EducationProvider({ children }: EducationProviderProps) {
   const { setStep, resume, setResume } = useResume();
 
-  // education
   const [educationList, setEducationList] = useState<EducationType[]>([educationField]);
 
   async function updateEducation(educationList: EducationType[]) {
@@ -103,7 +102,7 @@ export function EducationProvider({ children }: EducationProviderProps) {
   }
 
   useEffect(() => {
-    if (resume.education && resume.education.length > 0) {
+    if (resume.education) {
       setEducationList(resume?.education);
     }
   }, [resume]);

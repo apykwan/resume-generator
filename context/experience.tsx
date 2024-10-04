@@ -39,7 +39,7 @@ type ExperienceContextType = {
   handleExperienceGenerateWithAi: (index: number) => void;
 }
 
-const experienceField: ExperienceType = {
+export const experienceField: ExperienceType = {
   title: '',
   company: '',
   address: '',
@@ -63,7 +63,6 @@ export function ExperienceProvider({ children }: ResumeProviderProps) {
   const { setStep, resume, setResume } = useResume();
   const [experienceList, setExperienceList] = useState<ExperienceType[]>([experienceField]);
   const [experienceLoading, setExperienceLoading] = useState({});
-
 
   function handleExperienceChange(e: ChangeEvent<HTMLInputElement>, index: number) {
     const { name, value } = e.target;
@@ -93,7 +92,7 @@ export function ExperienceProvider({ children }: ResumeProviderProps) {
     try {
       const data = await updateExperienceToDb({ 
         ...resume, 
-        experience: experienceList 
+        experience: [...experienceList] 
       });
       setResume(data);
       toast.success("Experience Updated successfully");
@@ -156,7 +155,7 @@ export function ExperienceProvider({ children }: ResumeProviderProps) {
   }
 
   useEffect(() => {
-    if (resume.experience && resume.experience.length > 0) {
+    if (resume.experience) {
       setExperienceList(resume?.experience);
     }
   }, [resume]);

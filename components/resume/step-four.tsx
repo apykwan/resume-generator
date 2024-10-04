@@ -26,7 +26,7 @@ export default function StepFour() {
         Education
       </h2>
       {educationList?.length > 0 && educationList?.map((education: EducationType, index: number) => (
-        <div key={education._id} className="mb-10">
+        <div key={`education-${index}`} className="mb-10">
           <Input 
             className="mb-3" 
             value={education.name}
