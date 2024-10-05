@@ -15,6 +15,7 @@ import {
   getUserResumeFromDb,
   getResumeFromDb,
   updateResumeFromDb,
+  deleteResumeFromDb
 } from '@/actions/resume';
 import { 
   ExperienceType, 
@@ -48,6 +49,7 @@ type ResumeContextType = {
   setResume: (cb: (value: ResumeType) => ResumeType) => void;
   saveResume: () => void;
   updateResume: () => void;
+  deleteResume: (_id: string) => void;
 }
 
 const initialState: ResumeType = {
@@ -85,6 +87,7 @@ const ResumeContext = createContext<ResumeContextType>({
   setStep: () => {},
   saveResume: () => {},
   updateResume: () => {},
+  deleteResume: () => {}
 });
 
 export function ResumeProvider({ children }: ResumeProviderProps) {
@@ -140,6 +143,17 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
     }
   }
 
+  async function deleteResume(_id: string) {
+    try {
+      await deleteResumeFromDb(_id);
+      setResumes(prevState => prevState.filter(resume => resume._id !== _id));
+      toast.success("Resume deleted successfully");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to delete resume");
+    }
+  }
+
   // useEffect(() => {
   //   if (pathname?.includes('/resume/create')) {
   //     setResume(initialState);
@@ -169,7 +183,8 @@ export function ResumeProvider({ children }: ResumeProviderProps) {
         resumes,
         setResume, 
         saveResume,
-        updateResume
+        updateResume,
+        deleteResume
       }}
     >
       {children}

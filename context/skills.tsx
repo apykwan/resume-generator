@@ -73,7 +73,7 @@ export function SkillsProvider({ children }: ResumeProviderProps) {
 
   function handleSkillsSubmit() {
     updateSkills(skillsList);
-    // router.push(`/dashboard/resume/download/${resume._id}`);
+    router.push(`/dashboard/resume/download/${resume._id}`);
   }
 
   async function updateSkills(skillsList: SkillsType[]) {
