@@ -1,4 +1,6 @@
-import DOMPurify from 'dompurify';
+'use client';
+
+import DOMPurify from "isomorphic-dompurify";
 
 import { type ResumeType } from '@/context';
 
@@ -7,11 +9,11 @@ type SummaryProps = {
 };
 
 export default function Summary({ resume }: SummaryProps) {
-  let summary = DOMPurify.sanitize(resume?.summary as string);
+  const summary = DOMPurify.sanitize(resume?.summary || '');
   return (
     <>
       {resume.summary && (
-        <div className="mt-5">
+        <section className="mt-5">
           <h2 
             className="text-sm font-bold mb-3"
             style={{ color: resume.themeColor }}
@@ -23,7 +25,7 @@ export default function Summary({ resume }: SummaryProps) {
             dangerouslySetInnerHTML={{ __html: summary }}
           >
           </article>
-        </div>
+        </section>
       )}
     </>
   );

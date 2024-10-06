@@ -44,7 +44,7 @@ export async function saveResumeToDb(data: ResumeType) {
   }
 }
 
-export async function getUserResumeFromDb() {
+export async function getUserResumeFromDb(): Promise<ResumeType | undefined> {
   try {
     db();
     const user = await currentUser();

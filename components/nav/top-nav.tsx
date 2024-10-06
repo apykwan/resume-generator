@@ -14,10 +14,10 @@ import { ModeToggle } from "@/components/nav/mode-toggle";
 import { useUser } from '@clerk/nextjs';
 
 export default function TopNav() {
-  const { isSignedIn, user } = useUser()
+  const { isSignedIn, user } = useUser();
 
   return (
-    <nav className="flex justify-between items-center p-1 shadow">
+    <nav className="top-nav flex justify-between items-center p-1 shadow">
       <Link href="/">
         <Image src="/logo.svg" alt="logo" width={50} height={50} />
       </Link>

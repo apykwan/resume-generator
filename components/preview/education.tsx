@@ -1,3 +1,5 @@
+'use client';
+
 import { type ResumeType } from '@/context/resume';
 import { type EducationType, useEducation } from '@/context';
 
